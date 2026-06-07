@@ -1,0 +1,27 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "kg"
+version = "0.1.0"
+description = "Deterministic file-level knowledge graph for codebase context retrieval."
+requires-python = ">=3.10"
+dependencies = [
+  "typer>=0.12",
+  "protobuf>=4.25",
+]
+
+[project.optional-dependencies]
+mcp = ["mcp>=1.0"]
+dev = ["pytest>=8.0"]
+
+[project.scripts]
+kg = "kg.cli:app"
+kg-mcp = "kg.mcp_server:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/kg"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
